@@ -18,6 +18,9 @@ import { CustomerComponent } from './main/customer/customer.component';
 import { ProductsComponent } from './main/products/products.component';
 import { StockComponent } from './main/stock/stock.component';
 import { OptionComponent } from './main/option/option.component';
+import { DrawContainerComponent } from './main/draw/draw-container/draw-container.component';
+import { DrawFormComponent } from './main/draw/draw-form/draw-form.component';
+import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { OptionComponent } from './main/option/option.component';
     CustomerComponent,
     ProductsComponent,
     StockComponent,
-    OptionComponent
+    OptionComponent,
+    DrawContainerComponent,
+    DrawFormComponent,
+    DrawListComponent,
   ],
   imports: [
     BrowserModule,
