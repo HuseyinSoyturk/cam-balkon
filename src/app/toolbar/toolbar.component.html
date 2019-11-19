@@ -1,6 +1,17 @@
-<mat-toolbar color='primary'>
-    <button mat-button>Çizimler</button>
-    <button mat-button>Müşteriler</button>
-    <button mat-button>Ürünler</button>
-    <button mat-button>Stok Durumu</button>
+<mat-toolbar class="toolbar" color='primary'>
+    <div>
+        <button routerLink="/dashboard" routerLinkActive="active" mat-button>Panel</button>
+        <button routerLink="/draw" routerLinkActive="active" mat-button>Çizim</button>
+        <button routerLink="/customer" routerLinkActive="active" mat-button>Müşteri</button>
+        <button routerLink="/product" routerLinkActive="active" mat-button>Ürün</button>
+        <button routerLink="/stock" routerLinkActive="active" mat-button>Stok Durumu</button>
+    </div>
+    <div>
+        <button routerLink="/option" routerLinkActive="active" mat-icon-button>
+            <mat-icon>settings_applications</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+    </div>
 </mat-toolbar>
