@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { Draw } from 'src/app/interface/interface';
 
 export interface Rectangle {
   width: number;
@@ -16,11 +17,7 @@ export class DrawService {
   rectangles: Rectangle[] = [];
   addRectangleSubject: Subject<Rectangle> = new Subject();
 
+  drawOnContainerSubject : Subject<Draw> = new Subject();
+
   constructor() {}
-
-  createContainer() {}
-
-  addRectangle(rectangle: Rectangle) {
-    this.addRectangleSubject.next(rectangle);
-  }
 }

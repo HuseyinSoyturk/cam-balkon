@@ -1,1 +1,15 @@
-<p>draw-form works!</p>
+<form [formGroup]='drawFrom' (ngSubmit)='onClickDraw()' class='form'>
+    <mat-form-field color="accent" appearance="outline">
+        <input matInput type="number" formControlName="width" placeholder="En">
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+        <input matInput type="number" formControlName="height" placeholder="Boy">
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline"> 
+        <input matInput type="number" formControlName="numOfGlass" placeholder="Cam Sayısı">
+    </mat-form-field>
+    <div class="button-container">
+        <button type="submit"  color="accent" mat-raised-button>Çiz</button>
+        <button type="reset" color="accent" mat-raised-button>Temizle</button>
+    </div>
+</form>

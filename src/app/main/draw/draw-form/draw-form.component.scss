@@ -1,0 +1,15 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+button{
+    width: 40%;
+}
