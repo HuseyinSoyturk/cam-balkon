@@ -18,14 +18,11 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
-import { DrawComponent } from './main/draw/draw.component';
 import { CustomerComponent } from './main/customer/customer.component';
 import { ProductsComponent } from './main/products/products.component';
 import { StockComponent } from './main/stock/stock.component';
 import { OptionComponent } from './main/option/option.component';
-import { DrawContainerComponent } from './main/draw/draw-container/draw-container.component';
-import { DrawFormComponent } from './main/draw/draw-form/draw-form.component';
-import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
+import { DrawComponent } from './main/draw/draw.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +31,11 @@ import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
     FooterComponent,
     MainComponent,
     DashboardComponent,
-    DrawComponent,
     CustomerComponent,
     ProductsComponent,
     StockComponent,
     OptionComponent,
-    DrawContainerComponent,
-    DrawFormComponent,
-    DrawListComponent,
+    DrawComponent,
   ],
   imports: [
     BrowserModule,
