@@ -17,27 +17,19 @@ export class DrawComponent implements AfterViewInit {
         en: 200,
         açı: 0
       },
+      {
+        en: 200,
+        açı: 90
+      },
       // {
       //   en: 200,
       //   açı: 90
       // },
-      // {
-      //   en: 200,
-      //   açı: -90
-      // },
-      // {
-      //   en: 200,
-      //   açı: 90
-      // },
-      // {
-      //   en: 400,
-      //   açı: 90
-      // }
 
     ]
   }
 
-  en = 40;
+  drawWidth = 20;
 
   constructor(private utiSer: UtilityService) { }
 
@@ -50,47 +42,68 @@ export class DrawComponent implements AfterViewInit {
 
     const layer = new Konva.Layer()
 
-    // const rect1 = new Konva.Rect({
-    //   x:0,
-    //   y:0,
-    //   width:200,
-    //   height:200,
-    //   fill: 'green',
-    //   stroke: 'black',
-    //   strokeWidth: 4
-    // })
-
-    let lastPoint1 = {
+    let startingPoint = {
       x: 10,
       y: 10
     }
-    let lastPoint2 = {
+
+    let endPoint = {
       x: 10,
-      y: lastPoint1.y + this.en
+      y: 30
     }
 
-    let lastdegree = 0;
-    let nextdegree = 90;
+    let totalDegree = 0;
+    let nextDegree = -90;
 
-    for (const kasa of this.drawExample.kasalar) {
-      lastdegree += kasa.açı
+
+    for (let index = 0; index < this.drawExample.kasalar.length; index++) {
+      const kasa = this.drawExample.kasalar[index];
+      totalDegree += kasa.açı
+      nextDegree = this.drawExample.kasalar[index + 1] ? this.drawExample.kasalar[index + 1].açı : 0
+
+
       let point1 = {
-        x: lastPoint1.x,
-        y: lastPoint1.y
+        x: startingPoint.x,
+        y: startingPoint.y
       }
-      let point2 = {
-        x: lastPoint2.x,
-        y: lastPoint2.y
+
+      let point2;
+
+      if (nextDegree >= 0) {
+        point2 = {
+          x: point1.x + kasa.en * this.utiSer.getCosFromDegree(totalDegree),
+          y: point1.y + kasa.en * this.utiSer.getSinFromDegree(totalDegree) 
+        }
       }
-      let point3 = {
-        x: lastPoint2.x + kasa.en * this.utiSer.getCosFromDegree(kasa.açı),
-        y: lastPoint2.y + kasa.en * this.utiSer.getSinFromDegree(kasa.açı)
+      else if (nextDegree < 0) {
+        point2 = {
+          x: point1.x + kasa.en * this.utiSer.getCosFromDegree(totalDegree) + this.drawWidth * this.utiSer.getTanFromDegree(nextDegree / 2),
+          y: point1.y + kasa.en * this.utiSer.getSinFromDegree(totalDegree) - this.drawWidth * this.utiSer.getTanFromDegree(totalDegree / 2)
+        }
       }
+
+
       let point4 = {
-        x: lastPoint1.x + kasa.en * this.utiSer.getCosFromDegree(kasa.açı),
-        y: lastPoint1.y + kasa.en * this.utiSer.getSinFromDegree(kasa.açı) - this.en * this.utiSer.getTanFromDegree(nextdegree / 2)
+        x: endPoint.x,
+        y: endPoint.y
       }
-      debugger
+
+      let point3;
+
+      if (nextDegree <= 0) {
+        point3 = {
+          x: point4.x + kasa.en * this.utiSer.getCosFromDegree(totalDegree),
+          y: point4.y + kasa.en * this.utiSer.getSinFromDegree(totalDegree) 
+        }
+      }
+      else if (nextDegree > 0) {
+        point3 = {
+          x: point4.x + kasa.en * this.utiSer.getCosFromDegree(totalDegree) - this.drawWidth * this.utiSer.getTanFromDegree(nextDegree / 2),
+          y: point4.y + kasa.en * this.utiSer.getSinFromDegree(totalDegree) + this.drawWidth * this.utiSer.getTanFromDegree(totalDegree / 2)
+        }
+      }
+
+
       let line = new Konva.Line({
         points: [
           point1.x,
@@ -104,15 +117,17 @@ export class DrawComponent implements AfterViewInit {
         ],
         stroke: 'black',
         closed: true,
-        fill: '#0000ff80'
+        fill: '#0000ff80',
+        lineCap: 'sqare',
+        // lineJoin: 'round',
+        // bezier : true
       });
-      lastPoint1 = point3
-      lastPoint2 = point4
+      startingPoint = point2
+      endPoint = point3
+
+      console.log({ totalDegree, nextDegree, points: line.points() })
       layer.add(line)
     }
-
-
-    // layer.add(rect1)
     stage.add(layer)
   }
 
