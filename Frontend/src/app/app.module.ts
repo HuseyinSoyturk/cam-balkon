@@ -11,6 +11,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+
 
 
 
@@ -23,6 +25,12 @@ import { ProductsComponent } from './main/products/products.component';
 import { StockComponent } from './main/stock/stock.component';
 import { OptionComponent } from './main/option/option.component';
 import { DrawComponent } from './main/draw/draw.component';
+import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
+import { DrawAddComponent } from './main/draw/draw-add/draw-add.component';
+import { DrawEditComponent } from './main/draw/draw-edit/draw-edit.component';
+import { DrawFrontViewComponent } from './main/draw/theDraw/draw-front-view/draw-front-view.component';
+import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +44,11 @@ import { DrawComponent } from './main/draw/draw.component';
     StockComponent,
     OptionComponent,
     DrawComponent,
+    DrawListComponent,
+    DrawAddComponent,
+    DrawEditComponent,
+    DrawFrontViewComponent,
+    ThedrawComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +60,8 @@ import { DrawComponent } from './main/draw/draw.component';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   
   ],
   providers: [],

@@ -6,6 +6,10 @@ import { CustomerComponent } from './main/customer/customer.component';
 import { StockComponent } from './main/stock/stock.component';
 import { OptionComponent } from './main/option/option.component';
 import { DrawComponent } from './main/draw/draw.component';
+import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
+import { DrawAddComponent } from './main/draw/draw-add/draw-add.component';
+import { DrawEditComponent } from './main/draw/draw-edit/draw-edit.component';
+import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
 
 const routes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -13,11 +17,17 @@ const routes: Routes = [
   { path: "customer", component: CustomerComponent },
   { path: "stock", component: StockComponent },
   { path: "option", component: OptionComponent },
-  { path: "draw", component: DrawComponent },
+  {
+    path: "draw", component: DrawComponent,
+    children: [
+      { path: "list", component: DrawListComponent },
+      { path: "thedraw", component: ThedrawComponent },
+    ]
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
