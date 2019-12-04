@@ -1,1 +1,64 @@
-<p>draw-add works!</p>
+<mat-card>
+  <form [formGroup]="drawForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Sistem Yüksekliği</mat-label>
+      <input matInput floatLabel="auto" type="number" formControlName="systemHeight">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Köşe Sayısı</mat-label>
+      <input (input)="onInputCornerNumber(cornerNumber)" matInput floatLabel="auto" type="number"
+        formControlName="cornerNumber">
+    </mat-form-field>
+    <mat-accordion>
+      <div formArrayName="corners" *ngIf="corners.controls.length > 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Köşeler
+          </mat-expansion-panel-header>
+          <div class="flex-column">
+            <mat-form-field appearance="outline" *ngFor="let corner of corners.controls; let i=index">
+              <mat-label>{{i+1}}. Köşe Açısı</mat-label>
+              <input matInput floatLabel="auto" type="number" [formControlName]="i">
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <div formArrayName="faces" *ngIf="faces.controls.length > 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Kasalar
+          </mat-expansion-panel-header>
+          <div class="flex-column">
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let face of faces.controls; let i=index">
+                <mat-expansion-panel-header>
+                  {{i+1}}.Kasa
+                </mat-expansion-panel-header>
+                <div class="flex-column" [formGroupName]="i">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{i+1}}.Kasa Eni</mat-label>
+                    <input matInput floatLabel="auto" type="number" formControlName="faceWidth">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{i+1}}.Kasa Cam Sayısı</mat-label>
+                    <input matInput floatLabel="auto" type="number" formControlName="glassNumber">
+                  </mat-form-field>
+                  <mat-accordion>
+                    <mat-expansion-panel *ngFor="let glass of glasses.controls; let i=index">
+                      <mat-expansion-panel-header>
+                        {{i+1}}.Kasa
+                      </mat-expansion-panel-header>
+                      
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+    <button style="margin-top: 20px;" mat-flat-button color="primary" type="submit"
+      [disabled]="!drawForm.valid">Submit</button>
+  </form>
+</mat-card>

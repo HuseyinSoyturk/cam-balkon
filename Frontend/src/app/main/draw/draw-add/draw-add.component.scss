@@ -1,0 +1,17 @@
+:host{
+    height: 100%;
+    overflow: auto;
+    form{
+        display: flex;
+        flex-direction: column;
+        .group{
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .flex-column{
+        display: flex;
+        flex-direction: column;
+    }
+}
