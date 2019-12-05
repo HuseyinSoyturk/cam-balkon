@@ -14,10 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
-
-
-
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
 
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -67,7 +65,9 @@ import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
     MatInputModule,
     MatTableModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatSelectModule
   
   ],
   providers: [],

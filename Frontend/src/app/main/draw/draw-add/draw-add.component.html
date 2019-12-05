@@ -30,26 +30,44 @@
           </mat-expansion-panel-header>
           <div class="flex-column">
             <mat-accordion>
-              <mat-expansion-panel *ngFor="let face of faces.controls; let i=index">
+              <mat-expansion-panel *ngFor="let face of faces.controls; let j=index">
                 <mat-expansion-panel-header>
-                  {{i+1}}.Kasa
+                  {{j+1}}.Kasa
                 </mat-expansion-panel-header>
-                <div class="flex-column" [formGroupName]="i">
+                <div class="flex-column" [formGroupName]="j">
                   <mat-form-field appearance="outline">
-                    <mat-label>{{i+1}}.Kasa Eni</mat-label>
+                    <mat-label>{{j+1}}.Kasa Eni</mat-label>
                     <input matInput floatLabel="auto" type="number" formControlName="faceWidth">
                   </mat-form-field>
                   <mat-form-field appearance="outline">
-                    <mat-label>{{i+1}}.Kasa Cam Sayısı</mat-label>
-                    <input matInput floatLabel="auto" type="number" formControlName="glassNumber">
+                    <mat-label>{{j+1}}.Kasa Cam Sayısı</mat-label>
+                    <input (input)="onInputGlassNumber($event.target.valueAsNumber , face)" matInput floatLabel="auto"
+                      type="number" formControlName="glassNumber">
                   </mat-form-field>
                   <mat-accordion>
-                    <mat-expansion-panel *ngFor="let glass of glasses.controls; let i=index">
-                      <mat-expansion-panel-header>
-                        {{i+1}}.Kasa
-                      </mat-expansion-panel-header>
-                      
-                    </mat-expansion-panel>
+                    <div formArrayName="glasses">
+                      <mat-expansion-panel *ngFor="let glass of glasses; let x=index">
+                        <mat-expansion-panel-header>
+                          {{x+1}}.Cam
+                        </mat-expansion-panel-header>
+                        <div class="flex-column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>{{x+1}}.Cam Eni</mat-label>
+                            <input matInput floatLabel="auto" type="number" formControlName="glassWidth">
+                          </mat-form-field>
+                          <mat-form-field appearance="outline">
+                            <mat-label>{{x+1}}.Cam Açılış Tarafı</mat-label>
+                            <mat-select formControlName="openingSide" placeholder="Açılış Şekli">
+                              <mat-option value="option">Option</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field appearance="outline">
+                            <mat-label>{{x+1}}.Cam Eni</mat-label>
+                            <mat-checkbox formControlName="haveHole">Delik Var mı ?</mat-checkbox>
+                          </mat-form-field>
+                        </div>
+                      </mat-expansion-panel>
+                    </div>
                   </mat-accordion>
                 </div>
               </mat-expansion-panel>

@@ -15,35 +15,17 @@ export class DrawAddComponent implements OnInit {
     cornerNumber: [''],
     corners: this.formBuilder.array([]),
     faces: this.formBuilder.array([]),
-    // cornerGroup: this.formBuilder.group({
-    // }),
-    // address: this.formBuilder.group({
-    //   street: [''],
-    //   city: [''],
-    //   state: [''],
-    //   zip: ['']
-    // }),
-    // aliases: this.formBuilder.array([
-    //   this.formBuilder.control('')
-    // ])
   });
 
-  kasaForm = this.formBuilder.group({
-    faceWidth: [''],
-    glassNumber: [''],
-    glasses: this.formBuilder.array([
-      this.formBuilder.group({
-        glassWidth: [''],
-        openingSide: [''],
-        haveHole: [true],
-        hole: this.formBuilder.group({
-          top: [''],
-          left: [''],
-          radius: ['']
-        })
-      })
-
-    ])
+  glassForm = this.formBuilder.group({
+    glassWidth: [''],
+    openingSide: [''],
+    haveHole: [true],
+    hole: this.formBuilder.group({
+      top: [''],
+      left: [''],
+      radius: ['']
+    })
   })
 
   get corners() {
@@ -52,10 +34,10 @@ export class DrawAddComponent implements OnInit {
 
   get faces() {
     return this.drawForm.get('faces') as FormArray;
-  }  
-  
+  }
+
   get glasses() {
-    return this.faces.get('glasses') as FormArray;
+    return this.drawForm.get('faces').get('glasses') as FormArray;
   }
 
   get cornerNumber() {
@@ -76,7 +58,35 @@ export class DrawAddComponent implements OnInit {
         this.corners.push(this.formBuilder.control(''))
       }
       for (let index = 0; index < difference + 1; index++) {
-        this.faces.push(this.kasaForm)
+        this.faces.push(this.formBuilder.group({
+          faceWidth: [''],
+          glassNumber: [''],
+          glasses: this.formBuilder.array([])
+        }))
+      }
+    }
+  }
+
+  onInputGlassNumber(glassNumber, face, j) {
+    debugger
+    const faceControl = face.controls.glasses.controls
+    let difference = glassNumber - faceControl.length
+    if (difference < 0) {
+      for (let index = 0; index < Math.abs(difference); index++) {
+        faceControl.removeAt(faceControl.length - 1)
+      }
+    } else if (difference > 0) {
+      for (let index = 0; index < difference; index++) {
+        faceControl.push(this.formBuilder.group({
+          glassWidth: [''],
+          openingSide: [''],
+          haveHole: [true],
+          hole: this.formBuilder.group({
+            top: [''],
+            left: [''],
+            radius: ['']
+          })
+        }))
       }
     }
   }
