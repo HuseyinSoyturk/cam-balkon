@@ -1,82 +1,120 @@
-<mat-card>
-  <form [formGroup]="drawForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline">
-      <mat-label>Sistem Yüksekliği</mat-label>
-      <input matInput floatLabel="auto" type="number" formControlName="systemHeight">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Köşe Sayısı</mat-label>
-      <input (input)="onInputCornerNumber(cornerNumber)" matInput floatLabel="auto" type="number"
-        formControlName="cornerNumber">
-    </mat-form-field>
-    <mat-accordion>
-      <div formArrayName="corners" *ngIf="corners.controls.length > 0">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            Köşeler
-          </mat-expansion-panel-header>
-          <div class="flex-column">
-            <mat-form-field appearance="outline" *ngFor="let corner of corners.controls; let i=index">
-              <mat-label>{{i+1}}. Köşe Açısı</mat-label>
-              <input matInput floatLabel="auto" type="number" [formControlName]="i">
-            </mat-form-field>
-          </div>
-        </mat-expansion-panel>
+<mat-vertical-stepper linear="true" #stepper>
+  <mat-step [stepControl]="drawForm">
+    <form [formGroup]="drawForm">
+      <ng-template matStepLabel>Temel Bilgiler</ng-template>
+      <mat-form-field appearance="outline">
+        <mat-label>Sistem Yüksekliği</mat-label>
+        <input matInput floatLabel="auto" type="number" formControlName="systemHeight">
+        
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Köşe Sayısı</mat-label>
+        <input matInput floatLabel="auto" type="number" formControlName="cornerNumber">
+      </mat-form-field>
+      <div>
+        <button color="primary" mat-raised-button matStepperNext>Next</button>
       </div>
-      <div formArrayName="faces" *ngIf="faces.controls.length > 0">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            Kasalar
-          </mat-expansion-panel-header>
-          <div class="flex-column">
-            <mat-accordion>
-              <mat-expansion-panel *ngFor="let face of faces.controls; let j=index">
-                <mat-expansion-panel-header>
-                  {{j+1}}.Kasa
-                </mat-expansion-panel-header>
-                <div class="flex-column" [formGroupName]="j">
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{j+1}}.Kasa Eni</mat-label>
-                    <input matInput floatLabel="auto" type="number" formControlName="faceWidth">
-                  </mat-form-field>
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{j+1}}.Kasa Cam Sayısı</mat-label>
-                    <input (input)="onInputGlassNumber($event.target.valueAsNumber , face)" matInput floatLabel="auto"
-                      type="number" formControlName="glassNumber">
-                  </mat-form-field>
-                  <mat-accordion>
-                    <div formArrayName="glasses">
-                      <mat-expansion-panel *ngFor="let glass of glasses; let x=index">
-                        <mat-expansion-panel-header>
-                          {{x+1}}.Cam
-                        </mat-expansion-panel-header>
-                        <div class="flex-column">
-                          <mat-form-field appearance="outline">
-                            <mat-label>{{x+1}}.Cam Eni</mat-label>
-                            <input matInput floatLabel="auto" type="number" formControlName="glassWidth">
-                          </mat-form-field>
-                          <mat-form-field appearance="outline">
-                            <mat-label>{{x+1}}.Cam Açılış Tarafı</mat-label>
-                            <mat-select formControlName="openingSide" placeholder="Açılış Şekli">
-                              <mat-option value="option">Option</mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                          <mat-form-field appearance="outline">
-                            <mat-label>{{x+1}}.Cam Eni</mat-label>
-                            <mat-checkbox formControlName="haveHole">Delik Var mı ?</mat-checkbox>
-                          </mat-form-field>
-                        </div>
-                      </mat-expansion-panel>
-                    </div>
-                  </mat-accordion>
-                </div>
-              </mat-expansion-panel>
-            </mat-accordion>
-          </div>
-        </mat-expansion-panel>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="cornerForm">
+    <form [formGroup]="cornerForm">
+      <ng-template matStepLabel>Köşe Bilgileri</ng-template>
+      <div formArrayName="corners" class="flex-column">
+        <mat-form-field appearance="outline" *ngFor="let corner of corners.controls; let i=index">
+          <mat-label>{{i+1}}.Köşe Açısı</mat-label>
+          <input matInput floatLabel="auto" type="number" [formControlName]="i">
+        </mat-form-field>
       </div>
-    </mat-accordion>
-    <button style="margin-top: 20px;" mat-flat-button color="primary" type="submit"
-      [disabled]="!drawForm.valid">Submit</button>
-  </form>
-</mat-card>
+      <div class="flex-row">
+        <div>
+          <button class="margin-r-10" color="primary" mat-raised-button matStepperPrevious>Prev</button>
+        </div>
+        <div>
+          <button color="primary" mat-raised-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+</mat-vertical-stepper>
+
+
+<!-- <form [formGroup]="drawForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Sistem Yüksekliği</mat-label>
+    <input matInput floatLabel="auto" type="number" formControlName="systemHeight">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Köşe Sayısı</mat-label>
+    <input (input)="onInputCornerNumber(cornerNumber)" matInput floatLabel="auto" type="number"
+      formControlName="cornerNumber">
+  </mat-form-field>
+  <mat-accordion>
+    <div formArrayName="corners" *ngIf="corners.controls.length > 0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Köşeler
+        </mat-expansion-panel-header>
+        <div class="flex-column">
+          <mat-form-field appearance="outline" *ngFor="let corner of corners.controls; let i=index">
+            <mat-label>{{i+1}}. Köşe Açısı</mat-label>
+            <input matInput floatLabel="auto" type="number" [formControlName]="i">
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </div>
+    <div formArrayName="faces" *ngIf="faces.controls.length > 0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Kasalar
+        </mat-expansion-panel-header>
+        <div class="flex-column">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let face of faces.controls; let j=index">
+              <mat-expansion-panel-header>
+                {{j+1}}.Kasa
+              </mat-expansion-panel-header>
+              <div class="flex-column" [formGroupName]="j">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{j+1}}.Kasa Eni</mat-label>
+                  <input matInput floatLabel="auto" type="number" formControlName="faceWidth">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>{{j+1}}.Kasa Cam Sayısı</mat-label>
+                  <input (input)="onInputGlassNumber($event.target.valueAsNumber , face)" matInput floatLabel="auto"
+                    type="number" formControlName="glassNumber">
+                </mat-form-field>
+                <mat-accordion>
+                  <div formArrayName="glasses">
+                    <mat-expansion-panel *ngFor="let glass of face.controls.glasses.controls ; let x=index">
+                      <mat-expansion-panel-header>
+                        {{x+1}}.Cam
+                      </mat-expansion-panel-header>
+                      <div class="flex-column" [formGroupName]="x">
+                        <mat-form-field appearance="outline">
+                          <mat-label>{{x+1}}.Cam Eni</mat-label>
+                          <input matInput floatLabel="auto" type="number" formControlName="glassWidth">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                          <mat-label>{{x+1}}.Cam Açılış Tarafı</mat-label>
+                          <mat-select formControlName="openingSide" placeholder="Açılış Şekli">
+                            <mat-option value="option">Option</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                          <mat-checkbox formControlName="haveHole">Delik Var mı ?</mat-checkbox>
+                        </mat-form-field>
+                      </div>
+                    </mat-expansion-panel>
+                  </div>
+                </mat-accordion>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+  <button style="margin-top: 20px;" mat-flat-button color="primary" type="submit"
+    [disabled]="!drawForm.valid">Submit</button>
+</form> -->

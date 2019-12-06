@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -67,7 +68,8 @@ import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
     MatCardModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule
   
   ],
   providers: [],

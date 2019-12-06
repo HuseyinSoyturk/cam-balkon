@@ -11,25 +11,20 @@ export class DrawAddComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   drawForm = this.formBuilder.group({
-    systemHeight: [''],
-    cornerNumber: [''],
-    corners: this.formBuilder.array([]),
-    faces: this.formBuilder.array([]),
+    systemHeight: ['', Validators.required],
+    cornerNumber: [0, Validators.required],
   });
 
-  glassForm = this.formBuilder.group({
-    glassWidth: [''],
-    openingSide: [''],
-    haveHole: [true],
-    hole: this.formBuilder.group({
-      top: [''],
-      left: [''],
-      radius: ['']
-    })
-  })
+  cornerForm = this.formBuilder.group({
+    corners: this.formBuilder.array([
+      this.formBuilder.control(''),
+      this.formBuilder.control(''),
+      this.formBuilder.control('')
+    ])
+  });
 
   get corners() {
-    return this.drawForm.get('corners') as FormArray;
+    return this.cornerForm.get('corners') as FormArray;
   }
 
   get faces() {
@@ -67,8 +62,7 @@ export class DrawAddComponent implements OnInit {
     }
   }
 
-  onInputGlassNumber(glassNumber, face, j) {
-    debugger
+  onInputGlassNumber(glassNumber, face) {
     const faceControl = face.controls.glasses.controls
     let difference = glassNumber - faceControl.length
     if (difference < 0) {
