@@ -31,16 +31,11 @@ export class DrawAddComponent implements OnInit {
     return this.faceForm.get('faces') as FormArray;
   }
 
-  get glasses() {
-    return this.drawForm.get('faces').get('glasses') as FormArray;
-  }
-
   get cornerNumber() {
     return this.drawForm.get('cornerNumber');
   }
 
-  onInputCornerNumber(cornerNumber) {
-    debugger
+  onInputCornerNumber(cornerNumber: number) {
     let difference = cornerNumber - this.corners.length
     if (difference < 0) {
       for (let index = 0; index < Math.abs(difference); index++) {
@@ -51,42 +46,38 @@ export class DrawAddComponent implements OnInit {
       }
     } else if (difference > 0) {
       for (let index = 0; index < difference; index++) {
-        this.corners.push(this.formBuilder.control(''))
+        this.corners.push(this.formBuilder.control('', Validators.required))
       }
       for (let index = 0; index < difference + 1; index++) {
         this.faces.push(this.formBuilder.group({
-          faceWidth: [''],
-          glassNumber: [''],
+          faceWidth: ['', Validators.required],
+          glassNumber: ['', Validators.required],
+          glasses: this.formBuilder.array([])
         }))
       }
     }
   }
 
-  onInputGlassNumber(glassNumber, face) {
-    const faceControl = face.controls.glasses.controls
-    let difference = glassNumber - faceControl.length
+  onInputGlassNumber(glassNumber, i) {
+    let glasses = (this.faces.controls[i].get('glasses') as FormArray)
+    const difference = glassNumber - glasses.controls.length
     if (difference < 0) {
       for (let index = 0; index < Math.abs(difference); index++) {
-        faceControl.removeAt(faceControl.length - 1)
+        glasses.removeAt(glasses.length - 1)
       }
-    } else if (difference > 0) {
+    } else {
       for (let index = 0; index < difference; index++) {
-        faceControl.push(this.formBuilder.group({
-          glassWidth: [''],
-          openingSide: [''],
-          haveHole: [true],
-          hole: this.formBuilder.group({
-            top: [''],
-            left: [''],
-            radius: ['']
-          })
+        glasses.push(this.formBuilder.group({
+          glassWidth: ['', Validators.required],
+          openingSide: ['', Validators.required],
+          haveHole: [false, Validators.required]
         }))
       }
     }
   }
 
   onSubmit() {
-    console.log(this.drawForm.value)
+    console.log(this.drawForm.value, this.cornerForm.value, this.faceForm.value)
   }
 
   ngOnInit() {
