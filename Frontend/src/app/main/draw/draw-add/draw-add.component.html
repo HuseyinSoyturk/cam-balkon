@@ -5,19 +5,20 @@
       <mat-form-field appearance="outline">
         <mat-label>Sistem Yüksekliği</mat-label>
         <input matInput floatLabel="auto" type="number" formControlName="systemHeight">
-        
+
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Köşe Sayısı</mat-label>
-        <input matInput floatLabel="auto" type="number" formControlName="cornerNumber">
+        <input matInput floatLabel="auto" type="number" formControlName="cornerNumber"
+          (input)="onInputCornerNumber($event.target.valueAsNumber)">
       </mat-form-field>
       <div>
-        <button color="primary" mat-raised-button matStepperNext>Next</button>
+        <button color="primary" mat-raised-button matStepperNext>İleri</button>
       </div>
 
     </form>
   </mat-step>
-  <mat-step [stepControl]="cornerForm">
+  <mat-step [stepControl]="cornerForm" *ngIf="corners.controls.length > 0">
     <form [formGroup]="cornerForm">
       <ng-template matStepLabel>Köşe Bilgileri</ng-template>
       <div formArrayName="corners" class="flex-column">
@@ -28,10 +29,35 @@
       </div>
       <div class="flex-row">
         <div>
-          <button class="margin-r-10" color="primary" mat-raised-button matStepperPrevious>Prev</button>
+          <button class="margin-r-10" color="primary" mat-raised-button matStepperPrevious>Geri</button>
         </div>
         <div>
-          <button color="primary" mat-raised-button matStepperNext>Next</button>
+          <button color="primary" mat-raised-button matStepperNext>İleri</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="faceForm" *ngIf="faces.controls.length > 0">
+    <form [formGroup]="faceForm">
+      <ng-template matStepLabel>Kasa Bilgileri</ng-template>
+      <div formArrayName="faces">
+        <div class="flex-column" *ngFor="let face of faces.controls; let i=index" [formGroupName]="i">
+          <mat-form-field appearance="outline">
+            <mat-label>{{i+1}}.Kasa Eni</mat-label>
+            <input matInput floatLabel="auto" type="number" [formControlName]="faceWidth">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>{{i+1}}.Kasa Cam Sayısı</mat-label>
+            <input matInput floatLabel="auto" type="number" [formControlName]="glassNumber">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div>
+          <button class="margin-r-10" color="primary" mat-raised-button matStepperPrevious>Geri</button>
+        </div>
+        <div>
+          <button color="primary" mat-raised-button matStepperNext>İleri</button>
         </div>
       </div>
     </form>
