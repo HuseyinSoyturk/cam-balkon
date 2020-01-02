@@ -17,6 +17,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -71,8 +73,9 @@ import { DrawUpperViewComponent } from './main/draw/thedraw/draw-upper-view/draw
     MatExpansionModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatStepperModule
-  
+    MatStepperModule,
+    MatTabsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

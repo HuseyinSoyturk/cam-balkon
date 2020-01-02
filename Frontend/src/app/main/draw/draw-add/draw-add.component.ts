@@ -44,7 +44,7 @@ export class DrawAddComponent implements OnInit {
       for (let index = 0; index < Math.abs(difference) + 1; index++) {
         this.faces.removeAt(this.faces.length - 1)
       }
-    } else if (difference > 0) {
+    } else if (difference >= 0) {
       for (let index = 0; index < difference; index++) {
         this.corners.push(this.formBuilder.control('', Validators.required))
       }
