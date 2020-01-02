@@ -33,6 +33,7 @@ import { DrawAddComponent } from './main/draw/draw-add/draw-add.component';
 import { DrawEditComponent } from './main/draw/draw-edit/draw-edit.component';
 import { DrawFrontViewComponent } from './main/draw/theDraw/draw-front-view/draw-front-view.component';
 import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
+import { DrawUpperViewComponent } from './main/draw/thedraw/draw-upper-view/draw-upper-view.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
     DrawEditComponent,
     DrawFrontViewComponent,
     ThedrawComponent,
+    DrawUpperViewComponent
   ],
   imports: [
     BrowserModule,

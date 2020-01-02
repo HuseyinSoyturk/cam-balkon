@@ -77,7 +77,9 @@ export class DrawAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.drawForm.value, this.cornerForm.value, this.faceForm.value)
+    console.log(this.drawForm.value)
+    console.log(this.cornerForm.value)
+    console.log(this.faceForm.value)
   }
 
   ngOnInit() {

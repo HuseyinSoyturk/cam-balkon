@@ -7,8 +7,6 @@ import { StockComponent } from './main/stock/stock.component';
 import { OptionComponent } from './main/option/option.component';
 import { DrawComponent } from './main/draw/draw.component';
 import { DrawListComponent } from './main/draw/draw-list/draw-list.component';
-import { DrawAddComponent } from './main/draw/draw-add/draw-add.component';
-import { DrawEditComponent } from './main/draw/draw-edit/draw-edit.component';
 import { ThedrawComponent } from './main/draw/thedraw/thedraw.component';
 
 const routes: Routes = [
